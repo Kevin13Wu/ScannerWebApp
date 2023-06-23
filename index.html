@@ -174,10 +174,10 @@
     <div class="modal-content">
 
       <!-- Modal Header -->
-      <div class="modal-header">
+      <!-- <div class="modal-header">
         <h4 class="modal-title">Modal Heading</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+      </div> -->
 
       <!-- Modal body -->
       <div class="modal-body">
@@ -187,7 +187,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCloseModal">Close</button>
       </div>
 
     </div>
@@ -199,7 +199,6 @@
   $(document).ready(function(){
     $("#btnScan").click(function(){
       function onScanSuccess(decodeText,decodeResult){
-          html5QrcodeScanner.clear();
           $("#btnCloseModal").click();
       }
 
@@ -209,34 +208,12 @@
 
       html5QrcodeScanner.render(onScanSuccess)
     });
+
+    $("#btnCloseModal").click(function(){
+      html5QrcodeScanner.clear();
+    });
   });
 
-  // function domReady(fn){
-  //   if(document.readyState ==="complete" || document.readyState ==="interactive"){
-  //     setTimeout(fn,1)
-  //   }else{
-  //     document.addEventListener("DOMContentLoaded",fn)
-  //   }
-  // }
-
-  // domReady(function(){
-  //   var myqr = document.getElementById('your-qr-result')
-  //   var lastResult,countResults = 0;
-  //   function onScanSuccess(decodeText,decodeResult){
-  //     if(decodeText !== lastResult){
-  //       ++countResults;
-
-  //       alert("Your QR is: " + decodeText,decodeResult)
-  //       myqr.innerHTML = ` your scan ${countResults} : ${decodeText}`
-  //     }
-  //   }
-
-  //   var htmlscanner = new Html5QrcodeScanner(
-  //     "my-qr-reader",{fps:10,qrbox:250}
-  //   )
-
-  //   htmlscanner.render(onScanSuccess)
-  // })
 </script>
 </body>
 </html>
