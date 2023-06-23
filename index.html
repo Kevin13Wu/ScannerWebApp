@@ -1,44 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>QR Code Scanner</title>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <h1>QR Code Scanner</h1>
-    <div id="your-qr-result"></div>
-    <div style="display: flex;justify-content: center;">
-        <div id="my-qr-reader" style="width: 500px;">
-        
-        </div>
+
+<div class="container mt-3">
+  <h3>Vertically Centered Modal Example</h3>
+  <p>Click on the button to open the modal.</p>
+  
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div id="your-qr-result"></div>
+        <div id="my-qr-reader" style="width: 400px;"></div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
     </div>
-    <script src="unpkg.com_html5-qrcode@2.3.8_html5-qrcode.min.js"></script>
-    <script>
-        function domReady(fn){
-            if(document.readyState ==="complete" || document.readyState ==="interactive"){
-                setTimeout(fn,1)
-            }else{
-                document.addEventListener("DOMContentLoaded",fn)
-            }
-        }
+  </div>
+</div>
 
-        domReady(function(){
-            var myqr = document.getElementById('your-qr-result')
-            var lastResult,countResults = 0;
-            function onScanSuccess(decodeText,decodeResult){
-                if(decodeText !== lastResult){
-                    ++countResults;
+<script src="unpkg.com_html5-qrcode@2.3.8_html5-qrcode.min.js"></script>
+<script>
+  function domReady(fn){
+    if(document.readyState ==="complete" || document.readyState ==="interactive"){
+      setTimeout(fn,1)
+    }else{
+      document.addEventListener("DOMContentLoaded",fn)
+    }
+  }
 
-                    alert("Your QR is: " + decodeText,decodeResult)
-                    myqr.innerHTML = ` your scan ${countResults} : ${decodeText}`
-                }
-            }
+  domReady(function(){
+    var myqr = document.getElementById('your-qr-result')
+    var lastResult,countResults = 0;
+    function onScanSuccess(decodeText,decodeResult){
+      if(decodeText !== lastResult){
+        ++countResults;
 
-            var htmlscanner = new Html5QrcodeScanner(
-                "my-qr-reader",{fps:10,qrbox:250}
-            )
+        alert("Your QR is: " + decodeText,decodeResult)
+        myqr.innerHTML = ` your scan ${countResults} : ${decodeText}`
+      }
+    }
 
-            htmlscanner.render(onScanSuccess)
-        })
-    </script>
+    var htmlscanner = new Html5QrcodeScanner(
+      "my-qr-reader",{fps:10,qrbox:250}
+    )
+
+    htmlscanner.render(onScanSuccess)
+  })
+</script>
 </body>
 </html>
